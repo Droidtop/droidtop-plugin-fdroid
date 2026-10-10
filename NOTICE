@@ -1,0 +1,17 @@
+F-Droid repositories for droidtop
+Copyright the droidtop contributors. Licensed under the GNU General Public License, version 3 (LICENSE).
+
+This plugin bundles, unmodified, and is built on:
+
+- F-Droid's index and core libraries, org.fdroid:index-android 0.2.0 and org.fdroid:core-android 0.0.1
+  (https://gitlab.com/fdroid/fdroidclient/-/tree/master/libs), Copyright 2010-2025 F-Droid Limited and
+  Contributors, licensed under the Apache License, Version 2.0.
+- kotlinx.serialization 1.9.0 (https://github.com/Kotlin/kotlinx.serialization), Copyright JetBrains s.r.o.
+  and contributors, licensed under the Apache License, Version 2.0.
+
+src/dev/droidtop/plugins/fdroid/EntryJar.kt and RepoLinks.kt follow the rules of F-Droid's
+org.fdroid.index.JarIndexVerifier, org.fdroid.index.v2.EntryVerifier and org.fdroid.repo.RepoUriGetter
+(same project and licence), rewritten for a stream and java.net.URI. The list of known repositories is
+taken from F-Droid's app/src/main/assets/default_repos.json and org.fdroid.repo.KnownRepos.
+
+The Apache License, Version 2.0 is at https://www.apache.org/licenses/LICENSE-2.0

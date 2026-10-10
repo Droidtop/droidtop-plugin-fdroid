@@ -15,7 +15,7 @@ internal data class Device(val sdk: Int, val abis: List<String>, val locale: Str
 }
 
 /**
- * Answers `search`, `app`, `latest` and `acquire` (docs/plugin-api.md 3 A12) from the compact indexes. A version is
+ * Answers `search`, `get_app`, `list_latest` and `acquire` (docs/plugin-api.md 3 A12) from the compact indexes. A version is
  * offered when it is stable (no release channel), the device's Android version is in its SDK range and it has no
  * native code or code for one of the device's ABIs, the rules of F-Droid's `CompatibilityCheckerImpl` for these
  * fields. When several repositories list an app, the first one added that has a compatible version offers it.

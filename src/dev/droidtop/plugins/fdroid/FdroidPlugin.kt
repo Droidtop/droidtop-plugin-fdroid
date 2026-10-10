@@ -44,7 +44,7 @@ class FdroidPlugin : DroidtopPlugin {
         val device = Device.of(args)
         return try {
             when (call.op) {
-                "sources" -> PluginReply.ok(sources())
+                "list_sources" -> PluginReply.ok(sources())
                 "open_link" -> review(args.optString("link"))
                 "remove_source" -> {
                     val repo = store.repos().firstOrNull { it.id == args.optString("source") }
@@ -60,9 +60,9 @@ class FdroidPlugin : DroidtopPlugin {
                     PluginReply.ok(JSONObject().put("message", if (enabled) "${repo.name} is used again" else "${repo.name} is switched off"))
                 }
                 "search" -> PluginReply.ok(catalog.search(args.optString("query"), args.optInt("limit", 200), device))
-                "app" -> catalog.app(args.optString("id"), device)?.let { PluginReply.ok(it) }
+                "get_app" -> catalog.app(args.optString("id"), device)?.let { PluginReply.ok(it) }
                     ?: PluginReply.error(PluginErrorCode.NOT_FOUND, "no repository you added lists ${args.optString("id")} for this device")
-                "latest" -> PluginReply.ok(catalog.latest(args.optString("after").takeIf { it.isNotBlank() }, args.optInt("limit", 500), device))
+                "list_latest" -> PluginReply.ok(catalog.latest(args.optString("after").takeIf { it.isNotBlank() }, args.optInt("limit", 500), device))
                 else -> PluginReply.error(PluginErrorCode.UNSUPPORTED, "unsupported op ${call.op}")
             }
         } catch (refused: EntryJar.Refused) {

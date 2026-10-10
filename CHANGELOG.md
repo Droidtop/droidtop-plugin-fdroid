@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.1
+
+- Reviewing a repository no longer fails with "entry.jar has no manifest": the signed index description is
+  unpacked and its manifest, signature file and signature block are checked directly, so a jar that lists
+  META-INF/MANIFEST.MF last (the real entry.jar of F-Droid and IzzyOnDroid) is read. The rules are F-Droid's own:
+  one signer with one certificate, the pinned or linked fingerprint, no MD5 or SHA-1 digests. A body that is not
+  a zip says how many bytes arrived and how they began. test/run.sh checks it against both real files.
+
 ## 0.1.0
 
 - First version: F-Droid repositories as an app catalog for droidtop (apps.catalog@1): add by link, QR

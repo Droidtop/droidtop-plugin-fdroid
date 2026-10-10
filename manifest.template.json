@@ -3,7 +3,7 @@
   "origin": "droidtop",
   "label": "F-Droid repositories",
   "description": "Browse, install and update Android apps from F-Droid repositories you add: by a repository link or QR code, by address and fingerprint, or from the repositories F-Droid itself lists. Each repository's index is checked against its signing key, and droidtop checks every app's package and signing key before Android installs it. No repository is added until you accept it.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "kind": "native_bundle",
   "contractVersion": 2,
   "abis": [],

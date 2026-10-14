@@ -1,9 +1,40 @@
-# F-Droid repositories for droidtop
+<h1 align="center">F-Droid repositories for droidtop</h1>
 
-A droidtop plugin (`native_bundle`, contract 2, contained) that is an **app catalog**
-(`apps.catalog@1`, droidtop `docs/plugin-api.md` 3 A12): it reads F-Droid repositories the
-person adds, and droidtop draws everything, downloads, checks and installs
-(droidtop `docs/SPEC.md` 10b "Installing apps", Droidtop/tracker#261).
+<p align="center">
+  <b>Browse, install and update Android apps from F-Droid repositories.</b><br>
+  Every index is checked against its signing key, and droidtop checks each app before Android installs it.
+</p>
+
+<p align="center">
+  <a href="https://github.com/Droidtop/droidtop-plugin-fdroid/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/Droidtop/droidtop-plugin-fdroid?label=release&style=flat-square"></a>
+  <a href="https://github.com/Droidtop/droidtop-plugin-fdroid/actions"><img alt="Build" src="https://img.shields.io/github/actions/workflow/status/Droidtop/droidtop-plugin-fdroid/build.yml?branch=main&label=build&style=flat-square"></a>
+  <img alt="For droidtop" src="https://img.shields.io/badge/for-droidtop-2f7bf5?style=flat-square">
+  <a href="LICENSE"><img alt="License: GPL--3.0" src="https://img.shields.io/badge/license-GPL--3.0-blue?style=flat-square"></a>
+</p>
+
+<p align="center">
+  <img src="docs/images/search.webp" alt="Get apps in droidtop searching F-Droid repositories, with anti-feature labels on each result" width="100%">
+</p>
+
+<p align="center">
+  <a href="#what-it-does">What it does</a> ·
+  <a href="#install">Install</a> ·
+  <a href="#status">Status</a> ·
+  <a href="#for-developers">For developers</a> ·
+  <a href="#licence">Licence</a>
+</p>
+
+An app catalog plugin for [droidtop](https://github.com/Droidtop/droidtop). You add the F-Droid repositories you want, and droidtop draws the search, the app pages and the updates. This plugin only reads the repositories.
+
+## Install
+
+You need [droidtop](https://github.com/Droidtop/droidtop). Repositories are not added for you, so start by adding one.
+
+1. In droidtop open **Settings > Plugins > Add**. droidtop's own catalog is always there.
+2. Pick **F-Droid repositories** and press **Install**.
+3. Read the permissions it asks for and press **Accept**. Nothing runs until you do.
+
+You can also browse the catalog at [droidtop.github.io](https://droidtop.github.io/), or open this plugin's install page directly: [Install in droidtop](https://droidtop.github.io/install-plugin?catalog=https%3A%2F%2Fraw.githubusercontent.com%2Fdroidtop%2Fdroidtop-platforms%2Fmain%2Fdroidtop-plugins%2Findex.json&id=droidtop.fdroid). That link only opens a review inside droidtop.
 
 ## What it does
 
@@ -26,7 +57,21 @@ person adds, and droidtop draws everything, downloads, checks and installs
   and the package name, version code and signing-key SHA-256s the APK must have; droidtop
   downloads it as a Downloads job and refuses anything else before Android sees it.
 
-## Upstream
+
+## Status
+
+Not built yet: diff indexes (a changed index is fetched whole), repository mirrors for downloads, icons and
+screenshots, a scheduled refresh, release channels other than stable, plain-http (`fdroidrepo://`)
+repositories (droidtop's network broker allows https only outside the local network).
+
+## For developers
+
+A droidtop plugin (`native_bundle`, contract 2, contained) that is an **app catalog**
+(`apps.catalog@1`, droidtop `docs/plugin-api.md` 3 A12): it reads F-Droid repositories the
+person adds, and droidtop draws everything, downloads, checks and installs
+(droidtop `docs/SPEC.md` 10b "Installing apps", Droidtop/tracker#261).
+
+### Upstream
 
 The F-Droid code is F-Droid's own index library, `org.fdroid:index` (gitlab.com/fdroid/fdroidclient,
 `libs/index`, Apache-2.0), chosen on Droidtop/tracker#261 over Droid-ify and Neo Store because it is the
@@ -37,7 +82,7 @@ SHA-256; to take upstream's fixes, bump both. The plugin parses with upstream's
 `EntryVerifier`/`JarIndexVerifier`, the same checks on a `JarInputStream`) and `RepoLinks` (upstream
 `RepoUriGetter`'s rules). A stream-based entry verifier is the change to offer upstream.
 
-## Files
+### Files
 
 - `src/dev/droidtop/plugins/fdroid/`: `FdroidPlugin` (the calls), `Indexer` (fetch and verify),
   `Catalog` (search, app, latest, acquire), `Store` (the plugin's data files), `EntryJar`, `RepoLinks`,
@@ -48,8 +93,6 @@ SHA-256; to take upstream's fixes, bump both. The plugin parses with upstream's
   bundled libraries under `dev.droidtop.plugins.fdroid.lib` with R8, hash.
 - `sign.sh`: signs with the origin key in CI (`PLUGIN_SIGNING_KEY`, `PLUGIN_SIGNING_CERT`).
 
-## Not built yet
+## Licence
 
-Diff indexes (a changed index is fetched whole), repository mirrors for downloads, icons and
-screenshots, a scheduled refresh, release channels other than stable, plain-http (`fdroidrepo://`)
-repositories (droidtop's network broker allows https only outside the local network).
+GPL-3.0, see [LICENSE](LICENSE) and [NOTICE](NOTICE). The F-Droid index library it builds on is Apache-2.0.

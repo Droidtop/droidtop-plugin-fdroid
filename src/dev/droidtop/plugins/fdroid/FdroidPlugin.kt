@@ -91,11 +91,11 @@ class FdroidPlugin : DroidtopPlugin {
     private fun review(link: String): PluginReply {
         val parsed = RepoLinks.parse(link) ?: return PluginReply.error(PluginErrorCode.INVALID_ARGS, "That is not an F-Droid repository address or link")
         if (RepoLinks.isArchive(parsed.address)) {
-            return PluginReply.error(PluginErrorCode.INVALID_ARGS, "That is a repository's archive; add the repository itself (its address ending in /repo)")
+            return PluginReply.error(PluginErrorCode.INVALID_ARGS, "That is a repository's archive. Add the address ending in /repo instead")
         }
         val known = KNOWN.firstOrNull { it.address == parsed.address }
         if (known != null && parsed.fingerprint != null && parsed.fingerprint != known.fingerprint) {
-            return PluginReply.error(PluginErrorCode.FAILED, "The link names another key than ${known.name}'s known one; nothing was added")
+            return PluginReply.error(PluginErrorCode.FAILED, "That link's key is not ${known.name}'s. Nothing was added")
         }
         val fingerprint = parsed.fingerprint ?: known?.fingerprint
         val preview = indexer.preview(parsed.address, fingerprint)
@@ -113,7 +113,7 @@ class FdroidPlugin : DroidtopPlugin {
                     .put("fingerprint", preview.verified.fingerprint).put("fingerprintFromLink", fingerprint != null)
                     .put("description", preview.description ?: "").put("apps", preview.apps).put("existing", existing)
                     .apply {
-                        if (fingerprint == null) put("note", "The link named no fingerprint. droidtop trusts this key from now on: compare it with the repository's own page first")
+                        if (fingerprint == null) put("note", "This key is trusted from now on. Compare it with the repository's page first")
                     },
             ),
         )

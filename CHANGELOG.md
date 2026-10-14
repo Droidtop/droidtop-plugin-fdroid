@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.2
+
+- Shorter text: a one-sentence description and one-line review notes and refusals ("This key is trusted
+  from now on. Compare it with the repository's page first").
+
 ## 0.1.1
 
 - Reviewing a repository no longer fails with "entry.jar has no manifest": the signed index description is

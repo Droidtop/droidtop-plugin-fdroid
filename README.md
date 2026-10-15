@@ -96,3 +96,7 @@ SHA-256; to take upstream's fixes, bump both. The plugin parses with upstream's
 ## Licence
 
 GPL-3.0, see [LICENSE](LICENSE) and [NOTICE](NOTICE). The F-Droid index library it builds on is Apache-2.0.
+
+## Signing
+
+The bundle carries `manifest.jws`: a detached ES256 JWS over the exact bytes of `manifest.json`, with this repository's leaf certificate in `x5c` (the root itself is not included). The leaf comes from the repository secrets `PLUGIN_SIGNING_KEY` and `PLUGIN_SIGNING_CERT` and was issued by the droidtop root (pinned by the droidtop app); it names the plugin's origin and id. `sign_jws.py` writes the signature and checks it against the leaf before packing. `manifest.sig` stays in the bundle for older droidtop builds. Expiry dates are not checked.

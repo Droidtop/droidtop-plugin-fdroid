@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.3
+
+- Signed with a leaf certificate issued by the droidtop root (manifest.jws); no functional change.
+
 ## 0.1.2
 
 - Shorter text: a one-sentence description and one-line review notes and refusals ("This key is trusted

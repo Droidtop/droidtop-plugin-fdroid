@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Calls droidtop by the contract 2.1 names (`net.request`, `job.get_status`, `job.cancel`), since the old ones go at contract 2.2 (Droidtop/tracker#762).
 - Names its kind for droidtop's Plugins page (`category`: sources, docs/plugin-api.md 1.2, Droidtop/tracker#179).
 
 ## 0.1.3

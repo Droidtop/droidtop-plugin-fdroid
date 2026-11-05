@@ -10,7 +10,7 @@ import org.json.JSONObject
 
 /**
  * Everything this plugin asks of droidtop, through the broker (docs/plugin-api.md 1.4): it runs contained, with no
- * socket and no file path of its own, so the network is `net.http` (small answers) and `net.download` (an index, as a
+ * socket and no file path of its own, so the network is `net.request` (small answers) and `net.download` (an index, as a
  * job into the plugin's own data), and its files are `data.open` descriptors.
  */
 internal class Host(private val context: PluginContext) {
@@ -26,7 +26,7 @@ internal class Host(private val context: PluginContext) {
 
     /** GET [url], at most 128 KiB, as bytes; [IOException] for anything but a 2xx answer that fits. */
     fun get(url: String): ByteArray {
-        val answer = call("net", "http", JSONObject().put("url", url).put("as", "base64").put("timeoutMs", 30_000))
+        val answer = call("net", "request", JSONObject().put("url", url).put("as", "base64").put("timeoutMs", 30_000))
         val status = answer.optInt("status")
         if (status == 404) throw NotFound(url)
         if (status !in 200..299) throw IOException("HTTP $status from $url")
@@ -36,7 +36,7 @@ internal class Host(private val context: PluginContext) {
 
     /** The first part of [url] as text (at most 128 KiB), whether or not there is more. */
     fun head(url: String): String {
-        val answer = call("net", "http", JSONObject().put("url", url).put("timeoutMs", 30_000))
+        val answer = call("net", "request", JSONObject().put("url", url).put("timeoutMs", 30_000))
         val status = answer.optInt("status")
         if (status !in 200..299) throw IOException("HTTP $status from $url")
         return answer.optString("body")
@@ -50,10 +50,10 @@ internal class Host(private val context: PluginContext) {
         val jobId = call("net", "download", JSONObject().put("url", url).put("name", name)).optString("jobId")
         while (true) {
             if (cancelled()) {
-                runCatching { call("plugins", "job_cancel", JSONObject().put("jobId", jobId)) }
+                runCatching { call("job", "cancel", JSONObject().put("jobId", jobId)) }
                 throw IOException("cancelled")
             }
-            val status = call("plugins", "job_status", JSONObject().put("jobId", jobId))
+            val status = call("job", "get_status", JSONObject().put("jobId", jobId))
             if (status.optBoolean("done")) {
                 if (!status.optBoolean("ok")) throw IOException(status.optString("message").ifBlank { "the download of $url failed" })
                 return

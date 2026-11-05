@@ -86,7 +86,7 @@ SHA-256; to take upstream's fixes, bump both. The plugin parses with upstream's
 
 - `src/dev/droidtop/plugins/fdroid/`: `FdroidPlugin` (the calls), `Indexer` (fetch and verify),
   `Catalog` (search, app, latest, acquire), `Store` (the plugin's data files), `EntryJar`, `RepoLinks`,
-  `Host` (the broker calls: `net.http`, `net.download`, `data.open`).
+  `Host` (the broker calls: `net.request`, `net.download`, `data.open`).
 - `manifest.template.json`: everything but `payload`. Permissions: `net.any` (repositories can be on
   any site), `intents.in` (repository links).
 - `prepare.sh`, `build.sh`, `rules.pro`: fetch and pin the libraries, compile, shrink and move the

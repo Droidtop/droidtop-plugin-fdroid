@@ -1,0 +1,29 @@
+{
+  "id": "droidtop.fdroid",
+  "origin": "droidtop",
+  "label": "F-Droid repositories",
+  "description": "Installs and updates Android apps from F-Droid and the F-Droid repositories you add.",
+  "version": "0.1.3",
+  "kind": "native_bundle",
+  "contractVersion": 2,
+  "category": "sources",
+  "abis": [],
+  "entryClass": "dev.droidtop.plugins.fdroid.FdroidPlugin",
+  "provides": [
+    {
+      "point": "apps.catalog",
+      "version": 1,
+      "label": "F-Droid repositories",
+      "links": [
+        {"scheme": "fdroidrepos"},
+        {"scheme": "fdroidrepo"},
+        {"scheme": "https", "host": "fdroid.link"},
+        {"scheme": "https", "pathSuffix": "/fdroid/repo"}
+      ]
+    }
+  ],
+  "permissions": [
+    {"id": "net.any", "required": true, "reason": "Reads the repositories you add, which can be on any website"},
+    {"id": "intents.in", "required": false, "reason": "Opens F-Droid repository links (fdroidrepos://, f-droid.org style repository addresses) so you can review and add the repository"}
+  ]
+}

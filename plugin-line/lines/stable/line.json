@@ -1,0 +1,9 @@
+{
+  "upstream": {
+    "repo": "Droidtop/droidtop-plugin-fdroid",
+    "ref": "creation",
+    "commit": "bee9c42b5c1b1ae0cbfe2cc932b00985aa081d62"
+  },
+  "version": "0",
+  "sharedPatches": false
+}

@@ -1,0 +1,27 @@
+name: Tests
+
+# The F-Droid core's own tests: EntryJar against real entry.jar files (test/run.sh). The plugin wrapper and the
+# bundle live on plugin-core and plugin/<line>.
+on:
+  push:
+    branches: [creation, 'ci/**']
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  entry-jar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Install kotlinc
+        run: |
+          curl -sfL https://github.com/JetBrains/kotlin/releases/download/v2.1.21/kotlin-compiler-2.1.21.zip -o "$RUNNER_TEMP/kotlin.zip"
+          unzip -q "$RUNNER_TEMP/kotlin.zip" -d "$RUNNER_TEMP"
+          echo "$RUNNER_TEMP/kotlinc/bin" >> "$GITHUB_PATH"
+      - run: test/run.sh

@@ -1,7 +1,7 @@
 name: Plugin bundle
 
-# Build, signing and the tag release live once, in Droidtop/droidtop-platforms,
-# pinned by commit (Droidtop/tracker#198). The build job never holds the signing
+# Build, signing and the tag release live once, in mytop-project/droidtop-platforms,
+# pinned by commit (mytop-project/tracker#198). The build job never holds the signing
 # key; the sign job runs this repository's sign.sh with PLUGIN_SIGNING_KEY and,
 # when present, PLUGIN_SIGNING_CERT. A tag named plugin-v* attaches the signed
 # bundle to that release.
@@ -20,7 +20,7 @@ jobs:
   bundle:
     permissions:
       contents: write
-    uses: Droidtop/droidtop-platforms/.github/workflows/droidtop-plugin-bundle.yml@1efbb7df7626174a7146e767dda52bb1a9b6cc98
+    uses: mytop-project/droidtop-platforms/.github/workflows/droidtop-plugin-bundle.yml@0d931db42f484004b9ca7438500b725f60f2e3fc
     with:
       plugin-dir: .
       artifact-name: droidtop-plugin-fdroid

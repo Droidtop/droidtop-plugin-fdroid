@@ -6,8 +6,8 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/Droidtop/droidtop-plugin-fdroid/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/Droidtop/droidtop-plugin-fdroid?label=release&style=flat-square"></a>
-  <a href="https://github.com/Droidtop/droidtop-plugin-fdroid/actions"><img alt="Build" src="https://img.shields.io/github/actions/workflow/status/Droidtop/droidtop-plugin-fdroid/build.yml?branch=main&label=build&style=flat-square"></a>
+  <a href="https://github.com/mytop-project/droidtop-plugin-fdroid/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/mytop-project/droidtop-plugin-fdroid?label=release&style=flat-square"></a>
+  <a href="https://github.com/mytop-project/droidtop-plugin-fdroid/actions"><img alt="Build" src="https://img.shields.io/github/actions/workflow/status/mytop-project/droidtop-plugin-fdroid/build.yml?branch=main&label=build&style=flat-square"></a>
   <img alt="For droidtop" src="https://img.shields.io/badge/for-droidtop-2f7bf5?style=flat-square">
   <a href="LICENSE"><img alt="License: GPL--3.0" src="https://img.shields.io/badge/license-GPL--3.0-blue?style=flat-square"></a>
 </p>
@@ -24,11 +24,11 @@
   <a href="#licence">Licence</a>
 </p>
 
-An app catalog plugin for [droidtop](https://github.com/Droidtop/droidtop). You add the F-Droid repositories you want, and droidtop draws the search, the app pages and the updates. This plugin only reads the repositories.
+An app catalog plugin for [droidtop](https://github.com/mytop-project/droidtop). You add the F-Droid repositories you want, and droidtop draws the search, the app pages and the updates. This plugin only reads the repositories.
 
 ## Install
 
-You need [droidtop](https://github.com/Droidtop/droidtop). Repositories are not added for you, so start by adding one.
+You need [droidtop](https://github.com/mytop-project/droidtop). Repositories are not added for you, so start by adding one.
 
 1. In droidtop open **Settings > Plugins > Add**. droidtop's own catalog is always there.
 2. Pick **F-Droid repositories** and press **Install**.
@@ -69,12 +69,12 @@ repositories (droidtop's network broker allows https only outside the local netw
 A droidtop plugin (`native_bundle`, contract 2, contained) that is an **app catalog**
 (`apps.catalog@1`, droidtop `docs/plugin-api.md` 3 A12): it reads F-Droid repositories the
 person adds, and droidtop draws everything, downloads, checks and installs
-(droidtop `docs/SPEC.md` 10b "Installing apps", Droidtop/tracker#261).
+(droidtop `docs/SPEC.md` 10b "Installing apps", mytop-project/tracker#261).
 
 ### Upstream
 
 The F-Droid code is F-Droid's own index library, `org.fdroid:index` (gitlab.com/fdroid/fdroidclient,
-`libs/index`, Apache-2.0), chosen on Droidtop/tracker#261 over Droid-ify and Neo Store because it is the
+`libs/index`, Apache-2.0), chosen on mytop-project/tracker#261 over Droid-ify and Neo Store because it is the
 reference implementation and the only one published as a library. `prepare.sh` pins it by version and
 SHA-256; to take upstream's fixes, bump both. The plugin parses with upstream's
 `IndexV2FullStreamProcessor` and models. Two pieces are rewritten here because upstream's take a
@@ -111,7 +111,7 @@ it a plugin, we have a branch for the actual core code, and releases are a blend
   `plugin-line/lines/<line>/line.json`.
 - **`creation`**: the F-Droid core (EntryJar, Indexer, Catalog, Store, RepoLinks) and its tests.
 - **`plugin/stable`**: `creation` at the pinned commit with `plugin-core` written over it, composed by
-  Droidtop/droidtop-platforms `tools/plugin_line.py` and checked by `plugin-line.yml`. The bundle and releases
+  mytop-project/droidtop-platforms `tools/plugin_line.py` and checked by `plugin-line.yml`. The bundle and releases
   are built from it; nothing is authored there.
 
 Every change lands on `creation` or `plugin-core` through a `ci/` branch, and the line is recomposed. There is no

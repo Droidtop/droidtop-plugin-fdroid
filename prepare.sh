@@ -6,7 +6,7 @@
 # FDROID_CLASSPATH:
 #   - org.fdroid:index-android and org.fdroid:core-android, F-Droid's own index
 #     library (gitlab.com/fdroid/fdroidclient libs/, Apache-2.0): the upstream
-#     this plugin takes its F-Droid code from (Droidtop/tracker#261);
+#     this plugin takes its F-Droid code from (mytop-project/tracker#261);
 #   - kotlinx-serialization core and json, which that library parses with
 #     (Apache-2.0), at the version it was built against.
 # To take upstream fixes, bump a version here and its digest together.
